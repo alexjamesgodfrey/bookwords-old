@@ -1,0 +1,20 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "icons/*": ["./icons/*"],
+      "components/*": ["./components/*"],
+      "images/*": ["./images/*"],
+      "types/*": ["./types/*"],
+      "styles/*": ["./styles/*"],
+      "public/*": ["./public/*"],
+      "utils/*": ["./utils/*"],
+      "hooks/*": ["./hooks/*"],
+      "*": ["./node_modules/*"]
+    }
+  }
+}

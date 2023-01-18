@@ -1,3 +1,3 @@
-export const Button = () => {
+export function Button() {
   return <button>Boop</button>
 }
