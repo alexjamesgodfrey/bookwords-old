@@ -1,4 +1,5 @@
-import { SupabaseClient, User } from '@supabase/supabase-js'
+import { User } from '@supabase/auth-helpers-nextjs'
+import { SupabaseClient } from '@supabase/supabase-js'
 import { Database } from 'types/supabase'
 
 type Profiles = Database['public']['Tables']['profiles']['Row']

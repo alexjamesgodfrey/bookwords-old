@@ -4,10 +4,12 @@ importers:
 
   .:
     specifiers:
+      dotenv-cli: ^7.0.0
       eslint-config-custom: workspace:*
       prettier: latest
       turbo: latest
     devDependencies:
+      dotenv-cli: 7.0.0
       eslint-config-custom: link:packages/eslint-config-custom
       prettier: 2.8.3
       turbo: 1.7.0
@@ -169,17 +171,30 @@ importers:
     specifiers:
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
+      autoprefixer: ^10.4.13
+      classnames: ^2.3.2
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
+      next: ^13.1.1
+      postcss: ^8.4.21
       react: ^18.2.0
+      react-dom: 18.2.0
+      tailwindcss: ^3.2.4
       tsconfig: workspace:*
       typescript: ^4.5.2
+    dependencies:
+      classnames: 2.3.2
+      next: 13.1.2_biqbaboplfbrettd7655fr4n2y
+      react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.10
+      autoprefixer: 10.4.13_postcss@8.4.21
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
+      postcss: 8.4.21
       react: 18.2.0
+      tailwindcss: 3.2.4_postcss@8.4.21
       tsconfig: link:../tsconfig
       typescript: 4.9.4
 
@@ -2702,6 +2717,26 @@ packages:
       dom-serializer: 0.2.2
       domelementtype: 1.3.1
     dev: false
+
+  /dotenv-cli/7.0.0:
+    resolution: {integrity: sha512-XfMzVdpdDTRnlcgvFLg3lSyiLXqFxS4tH7RbK5IxkC4XIUuxPyrGoDufkfLjy/dA28EILzEu+mros6h8aQmyGg==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      dotenv: 16.0.3
+      dotenv-expand: 10.0.0
+      minimist: 1.2.7
+    dev: true
+
+  /dotenv-expand/10.0.0:
+    resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
+    engines: {node: '>=12'}
+    dev: true
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: true
 
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
