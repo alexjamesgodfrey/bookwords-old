@@ -1,11 +1,13 @@
 import { User } from '@supabase/auth-helpers-nextjs'
 import { SupabaseClient } from '@supabase/supabase-js'
+import { UploadStep } from 'types/UploadStep'
 import { Database } from 'types/supabase'
 
 export default async function uploadEpub(
   supabase: SupabaseClient<Database>,
   user: User | null,
-  setUploading: React.Dispatch<React.SetStateAction<boolean>>,
+  setUploading: (uploadStep: UploadStep) => void,
+  setFileId: (fileId: string | null) => void,
   event: React.ChangeEvent<HTMLInputElement>
 ) {
   if (!user) return
@@ -13,21 +15,26 @@ export default async function uploadEpub(
   if (!event.target.files) return
 
   try {
-    setUploading(true)
+    setUploading(UploadStep.UPLOADING)
     const file = event.target.files[0]
     const fileExt = file.name.split('.').pop()
-    const fileName = `${user.id}/${file.name}/.${fileExt}`
+    const fileName = `${user.id}/${file.name}.${fileExt}`
 
     let { error: uploadError } = await supabase.storage
-      .from('avatars')
-      .upload(fileName, file, { upsert: true })
+      .from('books')
+      .upload(fileName, file, {
+        upsert: true,
+      })
 
     if (uploadError) {
       throw uploadError
     }
+
+    setUploading(UploadStep.UPLOAD_COMPLETE)
+    setFileId(fileName)
   } catch (error) {
-    alert(error) // TODO: replace with toast
+    console.log(error)
+    setUploading(UploadStep.UPLOAD_FAILED)
   } finally {
-    setUploading(false)
   }
 }

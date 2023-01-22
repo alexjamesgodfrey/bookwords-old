@@ -54,8 +54,8 @@ export default function AuthPopup({ show, setShow }: Props) {
                   </Dialog.Title>
                   <div className="my-2">
                     <p className="text-sm text-gray-500">
-                      Login to contribute your epubs for free Bookwords analysis
-                      and public sharing.
+                      Login to access our API and contribute your ebooks for
+                      Bookwords analysis.
                     </p>
                   </div>
                   <div className="mx-auto w-64 pt-1">

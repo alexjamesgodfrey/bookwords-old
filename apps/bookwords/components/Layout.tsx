@@ -1,16 +1,17 @@
 import AboutSection from 'components/Analysis/AboutSection'
 import Header from 'components/Header'
-import posterImage from 'images/poster.png'
 import Image from 'next/image'
 import { GoogleBookItem } from 'types/GoogleBooks'
+import imageFromBook from 'utils/imageFromBook'
 import Redirects from './Analysis/Redirects'
 
 interface Props {
   book: GoogleBookItem
   children: React.ReactNode
+  setShowLogin: (show: boolean) => void
 }
 
-export function Layout({ book, children }: Props) {
+export function Layout({ book, children, setShowLogin }: Props) {
   return (
     <>
       <header className="bg-slate-50 dark:bg-slate-800 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120">
@@ -26,7 +27,7 @@ export function Layout({ book, children }: Props) {
           <div className="relative mx-auto block w-48 overflow-hidden rounded-lg sm:w-64 sm:rounded-xl lg:w-auto lg:rounded-2xl">
             <Image
               className="mx-auto rounded-sm bg-slate-200 shadow-xl shadow-slate-400 dark:shadow-slate-600"
-              src={book.volumeInfo.imageLinks?.medium || posterImage}
+              src={imageFromBook(book)}
               alt=""
               sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
               width={150}
@@ -50,9 +51,9 @@ export function Layout({ book, children }: Props) {
         </div>
       </header>
       <main className="min-h-full border-t  border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
-        <Header />
+        <Header setShowLogin={setShowLogin} />
         {/* <Waveform className="absolute top-0 left-0 right-0 z-[-10] h-20 w-full" /> */}
-        <div className="relative">{children}</div>
+        <div>{children}</div>
       </main>
       <footer className="border-t border-slate-200 bg-slate-50 py-10 pb-40 sm:py-16 sm:pb-32 lg:hidden">
         <div className="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4">

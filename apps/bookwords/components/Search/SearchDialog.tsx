@@ -59,8 +59,6 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
   }, [open, setOpen])
 
   useEffect(() => {
-    console.log(query)
-
     const fetchSearchResults = async () => {
       if (query === '') {
         setSearchResults([])

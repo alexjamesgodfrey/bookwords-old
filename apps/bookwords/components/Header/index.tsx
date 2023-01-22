@@ -1,13 +1,19 @@
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
 import classNames from 'classnames'
 import TopLevelNavItem from 'components/Header/TopLevelNavItem'
 import Search from 'components/Search'
+import { Database } from 'types/supabase'
 import { Button } from 'ui'
 
 interface Props {
+  setShowLogin: (show: boolean) => void
   className?: string
 }
 
-export default function Header({ className }: Props) {
+export default function Header({ setShowLogin, className }: Props) {
+  const supabase = useSupabaseClient<Database>()
+  const user = useUser()
+
   return (
     <div
       className={classNames(
@@ -30,9 +36,22 @@ export default function Header({ className }: Props) {
           <MobileSearch />
           <ModeToggle />
         </div> */}
-        <Button variant="primary" arrow="right">
-          Sign in
-        </Button>
+        {user ? (
+          <>
+            {/* @ts-ignore */}
+            <Button variant="danger" onClick={() => supabase.auth.signOut()}>
+              Sign out
+            </Button>
+          </>
+        ) : (
+          <Button
+            variant="primary"
+            arrow="right"
+            onClick={() => setShowLogin(true)}
+          >
+            Sign in
+          </Button>
+        )}
       </div>
     </div>
   )
