@@ -1,3 +1,4 @@
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 import classNames from "classnames"
 import Link from "next/link"
 
@@ -21,6 +22,7 @@ const variantStyles = {
     "rounded-full bg-zinc-100 py-1 px-3 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800/40 dark:text-zinc-400 dark:ring-1 dark:ring-inset dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300",
   danger:
     "rounded-full py-1 px-3 text-white bg-red-400/10 text-red-400 ring-1 ring-inset ring-red-400/20 hover:bg-red-400/10 hover:text-red-300 hover:ring-red-300",
+  info: "rounded-full py-1 px-3 text-white bg-blue-400/10 text-blue-400 ring-1 ring-inset ring-blue-400/20 hover:bg-blue-400/10 hover:text-blue-300 hover:ring-blue-300",
   filled:
     "rounded-full bg-zinc-900 py-1 px-3 text-white hover:bg-zinc-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-400",
   outline:
@@ -32,7 +34,7 @@ interface Props {
   variant?: keyof typeof variantStyles
   className?: string
   children: React.ReactNode
-  arrow?: "left" | "right" | "up"
+  arrow?: "left" | "right" | "up" | "diagonal"
   href?: string
   onClick?: () => void
 }
@@ -53,24 +55,27 @@ export function Button({
     className
   )
 
-  let arrowIcon = (
-    <ArrowIcon
-      className={classNames(
-        "h-5 w-5",
-        variant === "text" && "relative top-px",
-        arrow === "left" && "-ml-1 rotate-180",
-        arrow === "up" && "rotate-[-90deg]",
-        arrow === "right" && "-mr-1"
-      )}
-    />
-  )
+  let arrowIcon =
+    arrow === "diagonal" ? (
+      <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-0.5 mt-[0.07rem]" />
+    ) : (
+      <ArrowIcon
+        className={classNames(
+          "h-5 w-5",
+          variant === "text" && "relative top-px",
+          arrow === "left" && "-ml-1 rotate-180",
+          arrow === "up" && "rotate-[-90deg]",
+          arrow === "right" && "-mr-1"
+        )}
+      />
+    )
 
   return (
     <Component href={""} className={className} {...props} onClick={onClick}>
       {arrow === "left" && arrowIcon}
       {children}
 
-      {arrow === "right" || (arrow === "up" && arrowIcon)}
+      {arrow && arrowIcon}
     </Component>
   )
 }
