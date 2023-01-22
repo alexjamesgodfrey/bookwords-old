@@ -56,6 +56,7 @@ export default function Book({ book }: Props) {
                   Upload epub
                 </Button>
               </label>
+              {/* @ts-ignore */}
               <Button variant="danger" onClick={() => supabase.auth.signOut()}>
                 Sign out{' '}
               </Button>
