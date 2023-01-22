@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
+import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 export default function AuthPopup({ show, setShow }: Props) {
   const session = useSession()
   const supabase = useSupabaseClient()
+  const router = useRouter()
 
   return (
     <>
@@ -62,8 +64,19 @@ export default function AuthPopup({ show, setShow }: Props) {
                       appearance={{ theme: ThemeSupa }}
                       providers={['apple', 'google']}
                       onlyThirdPartyProviders={true}
+                      redirectTo={
+                        (process.env.NODE_ENV === 'production'
+                          ? process.env.NEXT_PUBLIC_PROD_HOST
+                          : process.env.NEXT_PUBLIC_DEV_HOST) + router.asPath
+                      }
                     />
                   </div>
+                  <p
+                    className="cursor-pointer text-center text-sm text-gray-500 underline"
+                    onClick={() => setShow(false)}
+                  >
+                    No thanks
+                  </p>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

@@ -7,6 +7,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui/components/**/*.{js,ts,jsx,tsx}',
   ],
+  darkMode: 'class',
   theme: {
     animation: {
       'spin-fast': 'spin 0.5s linear infinite',

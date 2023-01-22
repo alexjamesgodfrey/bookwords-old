@@ -1,11 +1,18 @@
 import Head from 'next/head'
 
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-import Login from 'components/Login'
+import {
+  useSession,
+  useSupabaseClient,
+  useUser,
+} from '@supabase/auth-helpers-react'
 
 export default function Home() {
   const session = useSession()
   const supabase = useSupabaseClient()
+
+  const user = useUser()
+
+  console.log(user)
 
   return (
     <>
@@ -16,7 +23,6 @@ export default function Home() {
           content="A free and publicly accessible word count API."
         />
       </Head>
-      <Login />
     </>
   )
 }
