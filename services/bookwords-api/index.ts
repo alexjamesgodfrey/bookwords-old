@@ -9,6 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 require("./routes/analysis")(app)
+require("./routes/public")(app)
 
 const port = process.env.PORT
 

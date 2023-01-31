@@ -11,6 +11,7 @@ const app = (0, express_1.default)();
 app.use(cors());
 app.use(express_1.default.json());
 require("./routes/analysis")(app);
+require("./routes/public")(app);
 const port = process.env.PORT;
 app.get("/", (req, res) => {
     res.send("Express + TypeScript");

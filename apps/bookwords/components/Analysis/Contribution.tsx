@@ -85,7 +85,7 @@ export default function Contribution({ contribution, book }: Props) {
           />
           <SmallStat
             num={contribution.characters_excluding_spaces.toLocaleString()}
-            label="characters (no spaces)"
+            label="non-space characters"
           />
           <SmallStat
             num={contribution.sentences.toLocaleString()}

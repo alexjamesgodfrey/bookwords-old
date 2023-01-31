@@ -33,7 +33,7 @@ export default function Book({ book, contributions }: Props) {
         />
       </Head>
       <Layout book={book} setShowLogin={setShowLogin}>
-        <Container className="prose mx-auto w-full max-w-none px-4 pb-4 pt-6 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:py-6 lg:px-6 xl:px-12">
+        <Container className="prose mx-auto max-w-none px-4 pb-4 pt-6 sm:px-6 md:px-4 lg:min-h-full lg:py-6 lg:px-6 xl:px-12">
           <AuthPopup show={showLogin} setShow={setShowLogin} />
           <main className="flex w-full flex-col items-center gap-4">
             <div className="relative flex w-full items-baseline justify-between">
