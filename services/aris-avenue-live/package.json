@@ -10,10 +10,11 @@
   },
   "type": "commonjs",
   "dependencies": {
-    "@alpacahq/alpaca-trade-api": "^2.16.1",
+    "@master-chief/alpaca": "^6.3.20",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
+    "@alpacahq/alpaca-trade-api": "^2.16.1",
     "@types/jest": "^29.2.6",
     "@types/node": "^17.0.45",
     "concurrently": "^7.6.0",
