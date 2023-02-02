@@ -1,6 +1,8 @@
 import AboutSection from 'components/Analysis/AboutSection'
 import Header from 'components/Header'
+import { Logo } from 'components/Home/Logo'
 import Image from 'next/image'
+import Link from 'next/link'
 import { GoogleBookItem } from 'types/GoogleBooks'
 import imageFromBook from 'utils/imageFromBook'
 import Redirects from './Analysis/Redirects'
@@ -15,12 +17,15 @@ export function Layout({ book, children, setShowLogin }: Props) {
   return (
     <>
       <header className="bg-slate-50 dark:bg-slate-800 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120">
-        <div className="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-12 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]">
+        <div className="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-10 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]">
+          <Link href="/">
+            <Logo className='w-6 h-6 mb-4'/>
+          </Link>
           <span className="font-mono text-slate-500 dark:text-zinc-300">
-            Analysis provided by{' '}
+            Analysis sponsored by{' '}
           </span>
           <span className="mt-4 flex gap-6 font-bold text-orange-600 dark:text-orange-500">
-            Sira
+            Aris
           </span>
         </div>
         <div className="relative z-10 mx-auto px-4 pb-4 pt-10 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:py-10 lg:px-6 lg:dark:border-slate-300 xl:px-12">
@@ -59,6 +64,7 @@ export function Layout({ book, children, setShowLogin }: Props) {
         <div className="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4">
           <AboutSection description={book.volumeInfo.description} />
           <div className="mt-2 flex gap-3 text-sm font-bold leading-7 text-slate-900">
+
             <span className="font-mono text-slate-500">
               Analysis provided by{' '}
             </span>
