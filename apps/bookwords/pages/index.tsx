@@ -1,4 +1,12 @@
 import Head from 'next/head'
+// import { CallToAction } from 'components/Home/CallToAction'
+// import { Faqs } from 'components/Home/Faqs'
+import { Header } from 'components/Home/Header'
+import { Hero } from 'components/Home/Hero'
+// import { Pricing } from 'components/Home/Pricing'
+// import { PrimaryFeatures } from 'components/Home/PrimaryFeatures'
+// import { SecondaryFeatures } from 'components/Home/SecondaryFeatures'
+// import { Testimonials } from 'components/Home/Testimonials'
 
 import {
   useSession,
@@ -22,6 +30,17 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico"/>
       </Head>
+      <Header />
+      <main>
+        <Hero />
+        {/* <PrimaryFeatures />
+        <SecondaryFeatures />
+        <CallToAction />
+        <Testimonials />
+        <Pricing />
+        <Faqs /> */}
+      </main>
+      {/* <Footer /> */}
     </>
   )
 }

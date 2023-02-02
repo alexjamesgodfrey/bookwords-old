@@ -45,15 +45,15 @@ export default function AuthPopup({ show, setShow }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 pb-3 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="mx-auto w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 pb-3 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-center text-lg font-medium leading-6 text-gray-900"
                   >
                     Become a Bookwords contributor
                   </Dialog.Title>
                   <div className="my-2">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 text-center">
                       Login to access our API and contribute your ebooks for
                       Bookwords analysis.
                     </p>

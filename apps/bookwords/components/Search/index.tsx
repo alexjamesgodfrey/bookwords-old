@@ -37,11 +37,11 @@ export default function Search() {
   }, [])
 
   return (
-    <div className="hidden lg:block lg:max-w-md lg:flex-auto">
+    <>
       {/* @ts-ignore */}
       <button
         type="button"
-        className="hidden h-8 w-full items-center gap-2 rounded-full pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20  dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20 lg:flex focus:[&:not(:focus-visible)]:outline-none"
+        className="hidden h-8 w-96 items-center gap-2 rounded-full pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20  dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20 lg:flex focus:[&:not(:focus-visible)]:outline-none"
         {...buttonProps}
       >
         <SearchIcon className="h-5 w-5 stroke-current" />
@@ -52,6 +52,6 @@ export default function Search() {
         </kbd>
       </button>
       <SearchDialog className="hidden lg:block" {...dialogProps} />
-    </div>
+    </>
   )
 }
