@@ -1,19 +1,24 @@
-import Alpaca from "@alpacahq/alpaca-trade-api"
+import dotenv from "dotenv"
+import { AlpacaClient, AlpacaStream } from "@master-chief/alpaca";
 
-const apikey = process.env.ALPACA_API_KEY
-const secretkey = process.env.ALPACA_SECRET_KEY
+dotenv.config()
 
-const options = {
-  keyId: apikey,
-  secretKey: secretkey,
-  paper: true, // Set to true to trade on Alpaca's paper trading system
+const apikey = process.env.ALPACA_API_KEY;
+const secretkey = process.env.ALPACA_SECRET_KEY;
+
+const client = new AlpacaClient({
+  credentials: {
+    key: apikey!,
+    secret: secretkey!,
+    paper: true,
+  },
+});
+
+async function getAccountInformation() {
+  const account = await client
+    .getAccount()
+    .then((account) => console.log(account))
+    .catch((err) => console.error(err));
 }
-const alpaca = new Alpaca(options)
 
-function getAccountInformation() {
-  alpaca.getAccount().then((account: Account) => {
-    console.log("Current Account:", account)
-  })
-}
-
-console.log(getAccountInformation())
+getAccountInformation();
