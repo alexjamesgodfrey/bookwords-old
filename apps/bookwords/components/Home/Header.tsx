@@ -12,7 +12,10 @@ import { Fragment, useState } from 'react'
 import { Database } from 'types/supabase'
 import { Button } from 'ui'
 
-function MobileNavLink({ href, children }) {
+function MobileNavLink({ href, children }: {
+  href: string
+  children: React.ReactNode
+}) {
   return (
     <Popover.Button as={Link} href={href} className="block w-full p-2">
       {children}
@@ -20,7 +23,7 @@ function MobileNavLink({ href, children }) {
   )
 }
 
-function MobileNavIcon({ open }) {
+function MobileNavIcon({ open }: { open: boolean }) {
   return (
     <svg
       aria-hidden="true"
