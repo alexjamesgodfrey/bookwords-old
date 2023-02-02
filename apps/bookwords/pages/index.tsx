@@ -12,8 +12,6 @@ export default function Home() {
 
   const user = useUser()
 
-  console.log(user)
-
   return (
     <>
       <Head>
@@ -22,6 +20,7 @@ export default function Home() {
           name="description"
           content="A free and publicly accessible word count API."
         />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
     </>
   )
