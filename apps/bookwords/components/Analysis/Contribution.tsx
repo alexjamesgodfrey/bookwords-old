@@ -45,31 +45,31 @@ export default function Contribution({ contribution, book }: Props) {
   }, [contribution.id])
 
   return (
-    <div>
+    <div className='w-full'>
       <div className="flex w-full items-center justify-center">
         <BigStat
           num={contribution.average_word.toPrecision(3)}
           label="avg. word length"
         />
         <BigStat num={contribution.words.toLocaleString()} label="words" />
-        <BigStat
+        {/* <BigStat
           num={withoutGrammarTops[0]?.word || ''}
           label="top non-grammar word"
-        />
+        /> */}
       </div>
 
       <div className="wrap flex items-center justify-center gap-2 ">
         <Button variant="info" arrow="diagonal">
-          A Song of Ice and Fire
+          Series Coming Soon
         </Button>
         {book.volumeInfo.authors?.length > 0 && (
           <Button variant="info" arrow="diagonal">
             {book.volumeInfo.authors[0]}
           </Button>
         )}
-        <Button variant="info" arrow="diagonal">
-          Alex Godfrey
-        </Button>
+        {/* <Button variant="info" arrow="diagonal">
+          Contributor Profile Coming Soon
+        </Button> */}
         <Button variant="info" arrow="diagonal">
           Use API
         </Button>
@@ -116,10 +116,16 @@ export default function Contribution({ contribution, book }: Props) {
         </div>
       </div>
 
+      <h3>Chapter by Chapter Analysis</h3>
+      <p>Coming soon...</p>
       <h3>Top Words</h3>
+      <p>Coming soon...</p>
       <h3>Top Non-Grammar Words</h3>
+      <p>Coming soon...</p>
       <h3>Top Names</h3>
+      <p>Coming soon...</p>
       <h3>Sentiment Analysis</h3>
+      <p>Coming soon...</p>
     </div>
   )
 }

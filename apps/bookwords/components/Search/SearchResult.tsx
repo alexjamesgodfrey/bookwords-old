@@ -3,25 +3,27 @@ import classNames from 'classnames'
 import posterImage from 'images/poster.png'
 import Image from 'next/image'
 import { useId } from 'react'
-import { GoogleBookItem } from 'types/GoogleBooks'
+import SearchItem from 'types/SearchItem'
 
 interface Props {
-  result: GoogleBookItem
+  result: SearchItem
   resultIndex: number
 }
 
 export default function SearchResult({ result, resultIndex }: Props) {
   let id = useId()
 
+  // console.log('result', result)
+
   return (
     <Combobox.Option
       key={result.id}
       value={result}
 
-      // {...autocomplete.getItemProps({
-      // item: result,
-      // source: collection.source,
-      // })}
+    // {...autocomplete.getItemProps({
+    // item: result,
+    // source: collection.source,
+    // })}
     >
       {({ active }) => (
         <li
@@ -30,13 +32,14 @@ export default function SearchResult({ result, resultIndex }: Props) {
             {
               'border-t border-zinc-100 dark:border-zinc-800': resultIndex > 0,
             },
-            'flex cursor-pointer items-center px-4 py-3 '
+            'flex cursor-pointer items-center px-4 py-2 relative'
           )}
           aria-labelledby={`${id}-hierarchy ${id}-title`}
         >
+          {result.native && <span className='bg-emerald-200 text-sm uppercase font-bold text-current p-0.5 rounded-md shadow absolute top-4 right-4'>analyzed</span>}
           <Image
             className="mr-2 rounded-sm bg-slate-200 shadow-xl shadow-slate-400 dark:shadow-slate-600"
-            src={result.volumeInfo.imageLinks?.thumbnail || posterImage}
+            src={result.url || posterImage}
             alt=""
             sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
             width={40}
@@ -44,14 +47,14 @@ export default function SearchResult({ result, resultIndex }: Props) {
             priority
           />
           <div className="ml-2">
-            <p className="font-bold text-slate-900 dark:text-zinc-200">
-              {result.volumeInfo.title}
+            <p className="font-bold text-lg text-slate-900 dark:text-zinc-200">
+              {result.title}
             </p>
-            {result.volumeInfo.authors ? (
-              <p>by {result.volumeInfo.authors.join(', ')}</p>
+            {/* {result.authors ? (
+              <p>by {result.authors.join(', ')}</p>
             ) : (
               <p>No authors found</p>
-            )}
+            )} */}
           </div>
         </li>
       )}

@@ -4,6 +4,7 @@ import 'focus-visible'
 import type { AppProps } from 'next/app'
 import { useState } from 'react'
 import 'styles/globals.css'
+import 'tippy.js/dist/tippy.css'
 import { Database } from 'types/supabase'
 
 export default function App({ Component, pageProps }: AppProps) {

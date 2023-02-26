@@ -5,7 +5,10 @@ import SearchResults from 'components/Search/SearchResults'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { GoogleBookItem } from 'types/GoogleBooks'
-import isSameBook from 'utils/isSameBook'
+import SearchItem from 'types/SearchItem'
+import imageFromBook from 'utils/imageFromBook'
+import makeQueryString from 'utils/makeQueryString'
+import supabase from 'utils/supabase'
 
 type Props = {
   open: boolean
@@ -18,7 +21,7 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
 
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
-  const [searchResults, setSearchResults] = useState<GoogleBookItem[]>([])
+  const [searchResults, setSearchResults] = useState<SearchItem[]>([])
   const [selectedResult, setSelectedResult] = useState(searchResults[0] || null)
 
   useEffect(() => {
@@ -70,19 +73,30 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=5&key=${process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY}`
       )
       const data = await response.json()
+      const queryWords = makeQueryString(query.trim())
+      const nativeData = await supabase
+        .from('books')
+        .select()
+        .textSearch('description', queryWords)
       setLoading(false)
 
       // filter out duplicates (same title & author)
-      const alreadyItems: GoogleBookItem[] = []
-      const filteredItems = data.items
-        ? data.items.filter((item: GoogleBookItem) => {
-            if (alreadyItems.some((b) => isSameBook(b, item))) {
-              return false
-            } else {
-              alreadyItems.push(item)
-              return true
-            }
-          })
+      const usedTitles: string[] = []
+      const nativeResults = nativeData.data ? nativeData.data.map((book) => {
+        usedTitles.push(book.title)
+        return { id: book.google_id, title: book.title, url: book.image, authors: [], native: true }
+      }).reverse() : []
+      console.log(nativeResults)
+      const filteredItems: SearchItem[] = data.items
+        ? data.items.reduce((acc: SearchItem[], item: GoogleBookItem) => {
+          if (usedTitles.some((t) => t === item.volumeInfo.title)) {
+            return acc
+          }
+          // console.log(acc)
+          const asSearchResult = { id: item.id, title: item.volumeInfo.title, url: imageFromBook(item), authors: [], native: false }
+          // console.log(acc.some((b) => b.id, asSearchResult.id))
+          return [...acc, asSearchResult]
+        }, nativeResults)
         : []
 
       setSearchResults(filteredItems)
@@ -95,7 +109,7 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
     <Transition.Root
       show={open}
       as={Fragment}
-      // afterLeave={() => autocomplete.setQuery('')}
+    // afterLeave={() => autocomplete.setQuery('')}
     >
       <Dialog
         onClose={setOpen}
@@ -113,7 +127,7 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
           <div className="fixed inset-0 bg-zinc-400/25 backdrop-blur-sm dark:bg-black/40" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:py-20 sm:px-6 md:py-32 lg:px-8 lg:py-[15vh]">
+        <div className="fixed inset-0 overflow-y-auto px-4 py-12 sm:py-20 sm:px-6 md:py-32 lg:px-8 lg:py-[15vh]">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -131,7 +145,7 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
                   router.push(`/book/${value.id}`)
                   setSelectedResult(value)
                 }}
-                // {...autocomplete.getRootProps({})}
+              // {...autocomplete.getRootProps({})}
               >
                 <SearchInput
                   query={query}
@@ -140,7 +154,7 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
                 />
                 <div
                   className="dark:bg-white/2.5 border-t border-zinc-200 bg-white empty:hidden dark:border-zinc-100/5"
-                  // {...autocomplete.getPanelProps({})}
+                // {...autocomplete.getPanelProps({})}
                 >
                   {/* {autocompleteState.isOpen && ( */}
                   <>

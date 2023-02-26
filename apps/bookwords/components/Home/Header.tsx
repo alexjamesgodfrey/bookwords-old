@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import TopLevelNavItem from 'components/Header/TopLevelNavItem'
 import { Container } from 'components/Home/Container'
 import AuthPopup from 'components/Login/AuthPopup'
-import Search from 'components/Search'
 import logo from 'images/logo.svg'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -117,7 +116,7 @@ export function Header() {
               </Link>
 
             </div>
-            <Search />
+            {/* <Search /> */}
             <div className="flex items-center gap-x-5 md:gap-x-8">
               <nav className="hidden md:block">
                 <ul role="list" className="flex items-center gap-2 lg:gap-4">

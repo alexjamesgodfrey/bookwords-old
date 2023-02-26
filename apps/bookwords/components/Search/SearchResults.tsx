@@ -2,12 +2,12 @@ import { Combobox } from '@headlessui/react'
 import SearchResult from 'components/Search/SearchResult'
 import LoadingSpinner from 'icons/LoadingSpinner'
 import NoResultsIcon from 'icons/NoResultsIcon'
-import { GoogleBookItem } from 'types/GoogleBooks'
+import SearchItem from 'types/SearchItem'
 
 interface Props {
   query: string
   loading: boolean
-  results: GoogleBookItem[]
+  results: SearchItem[]
 }
 
 export default function SearchResults({ query, loading, results }: Props) {

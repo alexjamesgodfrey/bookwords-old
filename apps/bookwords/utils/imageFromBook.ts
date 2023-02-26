@@ -11,7 +11,7 @@ export default function imageFromBook(book: GoogleBookItem): string {
     book.volumeInfo.imageLinks?.medium ||
     book.volumeInfo.imageLinks?.small ||
     book.volumeInfo.imageLinks?.thumbnail ||
-    book.volumeInfo.imageLinks.smallThumbnail ||
+    book.volumeInfo.imageLinks?.smallThumbnail ||
     'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png'
   )
 }

@@ -1,4 +1,5 @@
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
+import Tippy from '@tippyjs/react'
 import Contribution from 'components/Analysis/Contribution'
 import Container from 'components/Container'
 import { Layout } from 'components/Layout'
@@ -9,6 +10,7 @@ import { useState } from 'react'
 import { GoogleBookItem } from 'types/GoogleBooks'
 import { Database } from 'types/supabase'
 import supabase from 'utils/supabase'
+
 
 interface Props {
   book: GoogleBookItem
@@ -21,15 +23,16 @@ export default function Book({ book, contributions }: Props) {
 
   const [showLogin, setShowLogin] = useState(false)
 
+  console.log(contributions)
+
   return (
     <>
       <Head>
         <title>{`${book.volumeInfo.title} Word Count and Word Analysis`}</title>
         <meta
           name="description"
-          content={`Bookwords word count and analysis of ${
-            book.volumeInfo.title
-          } by ${book.volumeInfo.authors.join(', ')}`}
+          content={`Bookwords word count and analysis of ${book.volumeInfo.title
+            } by ${book.volumeInfo.authors.join(', ')}`}
         />
       </Head>
       <Layout book={book} setShowLogin={setShowLogin}>
@@ -39,14 +42,16 @@ export default function Book({ book, contributions }: Props) {
             <div className="relative flex w-full items-baseline justify-between">
               <h2 className="m-0 p-0">
                 Word Analysis{' '}
-                <span className="text-sm">
+                {/* <span className="text-sm">
                   contribution from{' '}
-                  <span className="cursor-pointer">Alex Godfrey</span>
-                </span>
+                  <span className="cursor-pointer">Anonymous</span>
+                </span> */}
               </h2>
-              <p className="m-0 cursor-pointer p-0 text-right text-sm text-gray-500">
-                see all contributions
-              </p>
+              <Tippy content="coming soon">
+                <p className="m-0 cursor-pointer p-0 text-right text-sm text-gray-500">
+                  see all contributions
+                </p>
+              </Tippy>
             </div>
 
             {contributions.length > 0 ? (
@@ -56,7 +61,7 @@ export default function Book({ book, contributions }: Props) {
             )}
           </main>
         </Container>
-      </Layout>
+      </Layout >
     </>
   )
 }

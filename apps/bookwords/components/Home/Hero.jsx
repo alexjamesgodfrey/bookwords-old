@@ -5,7 +5,7 @@ import Search from 'components/Search'
 
 export function Hero() {
   return (
-    <Container className="pt-20 pb-16 text-center">
+    <Container className="pt-12 pb-16 text-center sm:pt-20">
       <h1 className="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
         Find the{' '}
         <span className="relative whitespace-nowrap text-emerald-600">
