@@ -49,7 +49,7 @@ export default function Book({ book, contributions }: Props) {
               </h2>
               <Tippy content="coming soon">
                 <p className="m-0 cursor-pointer p-0 text-right text-sm text-gray-500">
-                  see all contributions
+                  see all contributions.
                 </p>
               </Tippy>
             </div>
