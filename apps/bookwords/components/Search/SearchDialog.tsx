@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { GoogleBookItem } from 'types/GoogleBooks'
 import SearchItem from 'types/SearchItem'
+import { Database } from 'types/supabase'
 import imageFromBook from 'utils/imageFromBook'
 import makeQueryString from 'utils/makeQueryString'
 import supabase from 'utils/supabase'
@@ -82,7 +83,7 @@ export default function SearchDialog({ open, setOpen, className }: Props) {
 
       // filter out duplicates (same title & author)
       const usedTitles: string[] = []
-      const nativeResults = nativeData.data ? nativeData.data.map((book) => {
+      const nativeResults = nativeData.data ? nativeData.data.map((book: Database['public']['Tables']['books']['Row']) => {
         usedTitles.push(book.title)
         return { id: book.google_id, title: book.title, url: book.image, authors: [], native: true }
       }).reverse() : []
